@@ -4,9 +4,9 @@ The full documentation will be loaded soon.
 
 
 Default call: 
-...
+''' matlab
 IDIF_extraction_call(PET_dyn_path,t_PET_delta,out_path) 
-...
+'''
 
 corresponds to
 
