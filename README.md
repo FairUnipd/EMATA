@@ -18,7 +18,7 @@ To extract IDIF from the CCA (when the FOV allows it…):
 
 ```matlab
 IDIF_extraction_call(PET_dyn_path, t_PET_delta, out_path,…,'extractionSite’, ‘CCA’, …)
-...
+```
 
 To perform Chen Correction with NLMEM: 
 
