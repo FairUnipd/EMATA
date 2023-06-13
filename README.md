@@ -11,13 +11,13 @@ IDIF_extraction_call(PET_dyn_path,t_PET_delta,out_path)
 corresponds to
 
 ```matlab
-IDIF_extraction_call(PET_dyn_path, t_PET_delta, out_path, 'InputFun', 'IDIF', 'extractionSite’, ‘ICA’, 'Feng’, 1, ‘Patlak’, 1)
+IDIF_extraction_call(PET_dyn_path, t_PET_delta, out_path, 'InputFun', 'IDIF', 'extractionSite', 'ICA', 'Feng', 1, 'Patlak', 1)
 ```
 
 To extract IDIF from the CCA (when the FOV allows it…):  
 
 ```matlab
-IDIF_extraction_call(PET_dyn_path, t_PET_delta, out_path,…,'extractionSite’, ‘CCA’, …)
+IDIF_extraction_call(PET_dyn_path, t_PET_delta, out_path,…,'extractionSite', 'CCA', …)
 ```
 
 To perform Chen Correction with NLMEM: 
@@ -47,7 +47,7 @@ Otherwise, if venous samples are available:
 ```
 
 IMPORTANT NOTE: for the time being, disable the motion correction step by adding the specific flag:
-```
+```matlab
 IDIF_extraction_call(...,'MoCo',0)
 ```
 
