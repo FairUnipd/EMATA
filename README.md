@@ -2,6 +2,7 @@
 
 The full documentation will be loaded soon.
 
+In order to be used, FSL needs to be installed on your computer. Once you have installed it, update the file /UTILITY_GENERAL/SETTINGS/fsl_settings.txt putting your FSL installation path.
 
 Default call: 
 ```matlab
