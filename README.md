@@ -76,7 +76,7 @@ The toolbox comes with a JSON configuration file (/UTILITY_GENERAL/SETTINGS/opti
 * **Tissue Spill-over masks** [ratio]: The two concentric masks (spill-in and background) used for tissue TAC derivation and spillover correction have an internal radius equal to twice the voxel size by default. 
 * **Patlak’s t-star** [min]: the equilibrium time between plasma and the reversible compartment needs to be identified for applying Patlak’s graphical method: the default value is 25 minutes after injection.
 
-You can edit the file directly or copy it and pass it externally to the toolbox:
+You can edit the file directly or copy it and pass its path to the toolbox:
 
 ```matlab
 emata(…,'options',<options_path>)
