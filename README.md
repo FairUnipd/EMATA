@@ -57,7 +57,7 @@ emata(…,'MoCo',0)
 ## OUTPUTS ##
 	
 IDIF curve is stored in a MATLAB struct, which is named after the extraction site of choice, and contains the final curve and time-grid together.
-After running Patlak’s Graphical Analysis, the original voxel-wise map and the map of the corresponding precisions (coefficients of variation, CVs, of parameter estimates) are stored in NIfTI files, together with a smoothed voxel-wise K<sub>i</sub> map (Gaussian filter, variance σ = ½ of the image voxel size). 
+After running Patlak’s Graphical Analysis, the resulting voxel-wise map and the map of the corresponding precisions (coefficients of variation, CVs, of parameter estimates) are stored in NIfTI files, together with a smoothed voxel-wise K<sub>i</sub> map (Gaussian filter, variance σ = ½ of the image voxel size). 
 All intermediate steps of the extraction algorithm are stored and can be used for quality check purposes. These are represented by: 
 * the parameters used for motion correction and the resulting motion-corrected images, provided as a .txt file and NIfTI images, respectively.
 * pseudo-angiographies and masks for carotid or siphons segmentation provided as NIfTI images.
@@ -68,14 +68,14 @@ All intermediate steps of the extraction algorithm are stored and can be used fo
 
 ## DEFAULT SETTINGS ##
 The toolbox comes with a JSON configuration file (/UTILITY_GENERAL/SETTINGS/options.json) which can be used to adapt the algorithm to specific dataset characteristics. The main options and the default values are listed below:
-* **Reference volume for motion correction** (*MoCo_start*) [min]: 20 by default, the reference PET volume is the one acquired 20 minutes post-injection.
-* **Static PET time-threshold** (*PseudoStatic_thr*) [min]: 30 by default, the static PET is calculated by summing the dynamic frames acquired from 30 minutes post-injection. 
+* **Reference volume for motion correction** (*MoCo_start*) [min]: 20 by default, the reference PET volume is the one acquired after 20 minutes post-injection.
+* **Static PET time-threshold** (*PseudoStatic_thr*) [min]: 30 by default, the static PET is calculated by summing the dynamic frames acquired starting from 30 minutes post-injection. 
 * **Initial Pseudo-Angiography threshold** (*PseudoTOF_init_thr*) [seconds]: 60 by default, the pseudo-Angiography is obtained summing all dynamic PET frames up to 60 seconds.
 * **Optimized Arterial Pseudo-Angiography threshold** (*add_tmode_ICA* or *add_tmode_CCA*) [number of volumes]: once venous peak time has been estimated, optimized arterial pseudo-angiography is obtained by summing a number of frames which is determined as function of venous peak time. By default, Pseudo-angiography is calculated by summing frames up to the venous peak time itself for ICA and one frame before for CCA. This is done because CCA peak time is expected to be anticipated for physiological reasons. However, depending on the reconstruction grid employed, no distinction in peak timing may be detected, and thus the two thresholds can be set to be equal.
-* **ICA/CCA/SSS size** (*mask_volume_ICA* or *mask_volume_CCA* or *mask_volume_SSS*)[mm<sup>3</sup>]:  These are used to binarize the masks obtained by the vesselness probability map resulting from the Jerman Filter. Default values are 300 mm<sup>3</sup> for ICA and 640 mm<sup>3</sup> for CCA – corresponding respectively to 19 and 40 voxels for a 2.8 mm x 2.8 mm x 2.0 mm PET reconstruction voxel size. Similarly, SSS size is also set to 4790 mm<sup>3<\sup>.
+* **ICA/CCA/SSS size** (*mask_volume_ICA* or *mask_volume_CCA* or *mask_volume_SSS*)[mm<sup>3</sup>]:  These are used to binarize the masks obtained by the vesselness probability map resulting from the Jerman Filter. Default values are 300 mm<sup>3</sup> for ICA and 640 mm<sup>3</sup> for CCA – corresponding respectively to 19 and 40 voxels for a 2.8 mm x 2.8 mm x 2.0 mm PET reconstruction voxel size. Similarly, SSS size is also set to 4790 mm<sup>3</sup>.
 * **Patlak’s t-star** (*Patlak_start*) [min]: the equilibrium time between plasma and the reversible compartment needs to be identified for applying Patlak’s graphical method: the default value is 25 minutes after injection.
 
-You can edit the file directly or copy it and pass its path to the toolbox:
+You can either edit the file directly or copy it and pass its path to the toolbox:
 
 ```matlab
 emata(…,'options',<options_path>)
