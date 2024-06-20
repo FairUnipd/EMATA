@@ -74,17 +74,17 @@ AIF.t = AIF_table.time';
 try
 
     %ICA
-    emata(PETDYN_path, t_PET_delta', tool_out_path,'extractionSite','ICA', 'Chen', 'NLMEM', covariates,'options',options_path);
+    emata(PETDYN_path, t_PET_delta', tool_out_path,'extractionSite','ICA', 'Chen', 'NLMEM', covariates);
 
     close all
 
     %CCA
-    emata(PETDYN_path, t_PET_delta', tool_out_path,'extractionSite','CCA', 'Chen', 'NLMEM', covariates,'options',options_path);
+    emata(PETDYN_path, t_PET_delta', tool_out_path,'extractionSite','CCA', 'Chen', 'NLMEM', covariates);
 
     close all
     
     %AIF-based
-    emata(PETDYN_path, t_PET_delta', tool_out_path,"InputFun",'AIF',AIF,'options',options_path);
+    emata(PETDYN_path, t_PET_delta', tool_out_path,"InputFun",'AIF',AIF);
 
 catch e
 
