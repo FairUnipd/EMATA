@@ -82,8 +82,8 @@ try
     emata(PETDYN_path, t_PET_delta', tool_out_path,'extractionSite','CCA', 'Chen', 'NLMEM', covariates,'options',options_path);
 
     close all
+    
     %AIF-based
-
     emata(PETDYN_path, t_PET_delta', tool_out_path,"InputFun",'AIF',AIF,'options',options_path);
 
 catch e
