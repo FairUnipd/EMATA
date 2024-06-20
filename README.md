@@ -75,6 +75,8 @@ The toolbox comes with a JSON configuration file (/UTILITY_GENERAL/SETTINGS/opti
 * **ICA/CCA/SSS size** (*mask_volume_ICA* or *mask_volume_CCA* or *mask_volume_SSS*)[mm<sup>3</sup>]:  These are used to binarize the masks obtained by the vesselness probability map resulting from the Jerman Filter. Default values are 300 mm<sup>3</sup> for ICA and 640 mm<sup>3</sup> for CCA – corresponding respectively to 19 and 40 voxels for a 2.8 mm x 2.8 mm x 2.0 mm PET reconstruction voxel size. Similarly, SSS size is also set to 4790 mm<sup>3</sup>.
 * **Patlak’s t-star** (*Patlak_start*) [min]: the equilibrium time between plasma and the reversible compartment needs to be identified for applying Patlak’s graphical method: the default value is 25 minutes after injection.
 
+NOTE: all of this parameters assume that t=0 is equal to the injection time. 
+
 You can either edit the file directly or copy it and pass its path to the toolbox:
 
 ```matlab
