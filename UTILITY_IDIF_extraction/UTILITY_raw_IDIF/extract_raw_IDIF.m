@@ -56,8 +56,11 @@ TACs_selected   = mat_IDIF_final;
 save_3D_nii(PET_dyn_path,mask_voxels,fullfile(qc_path,['QC_' anatomy '.nii']));
 
 %smart plot
-smart_3D_plot(anatomical_mask, xyz, PET2D,t_PET_emi,voxsize, angulation, qc_path, anatomy);
+if isfield(options,'advanced_graphics_enabled') && options.advanced_graphics_enabled
 
+    smart_3D_plot(anatomical_mask, xyz, PET2D,t_PET_emi,voxsize, angulation, qc_path, anatomy);
+
+end
 
 %plotting IDIF
 figure('visible','off')
