@@ -17,12 +17,11 @@ DIM             = size(DYN);
 %=====================
 %	  -re-aligning 
 %=====================
-
-IN                  = convertpath2lnx(fullfile(inpath,'temp.nii.gz'));
+IN                  = fullfile(inpath,'temp.nii.gz');
 REF                 = convertpath2lnx(fullfile(inpath,'REF.nii.gz'));
 OUT                 = convertpath2lnx(fullfile(inpath,'temp_MoCo'));
-transf_folder       = convertpath2lnx(fullfile(inpath,'temp_MoCo.mat'));
-singleMoCo_folder   = convertpath2lnx(fullfile(inpath,[fname '_MoCo_single']));
+transf_folder       = fullfile(inpath,'temp_MoCo.mat');
+singleMoCo_folder   = fullfile(inpath,[fname '_MoCo_single']);
 
 imgs_2_write        = DYN(:,:,:,iframe:fframe);
 nii                 = load_untouch_nii(filename);
@@ -31,6 +30,9 @@ nii.hdr.dime.dim(5) = size(imgs_2_write,4);
 nii.hdr.dime.glmax  = max(imgs_2_write(:));
 nii.hdr.dime.glmax  = min(imgs_2_write(:));
 save_untouch_nii(nii,IN)
+
+IN                  = convertpath2lnx(IN);
+
 
 fprintf(1,'\n Reference extraction ... ');
 cmdprfx = get_fsl_command('fslroi');
@@ -56,7 +58,8 @@ system(cmd2execute);
 for frame = 1: DIM(4)      
     clear tmp tmp_MoCo pos
     fprintf(1,['   Volume no. ' sprintf('%02d',frame-1) ' \n']);
-    tmp      = convertpath2lnx(fullfile(singleMoCo_folder, [fname '_' sprintf('%04d',frame-1)]));
+    tmp_orig = fullfile(singleMoCo_folder, [fname '_' sprintf('%04d',frame-1)]);
+    tmp      = convertpath2lnx(tmp_orig);
     tmp_MoCo = convertpath2lnx(fullfile(singleMoCo_folder, [fname '_' sprintf('%04d',frame-1) '_MoCo']));
     
     % Selecting transform to be applied
@@ -75,15 +78,17 @@ for frame = 1: DIM(4)
     system(cmd2execute);
     
     % Clean Up
-    delete([tmp '.nii.gz'])    
+    delete([tmp_orig '.nii.gz'])    
 end
 fprintf(1,'done. ');
 
 fprintf(1,'\n Merging motion corrected frames ');
-file_list              = dir(fullfile(singleMoCo_folder,[fname '_*']));
-motion_corrected_name  = convertpath2lnx(fullfile(inpath,[fname '_MoCo.nii.gz']));
+file_list                   = dir(fullfile(singleMoCo_folder,[fname '_*']));
+motion_corrected_name       = fullfile(inpath,[fname '_MoCo.nii.gz']);
+motion_corrected_name_lnx   = convertpath2lnx(motion_corrected_name);
+
 cmdprfx = get_fsl_command('fslmerge');
-cmd2execute = [cmdprfx ' -t ' motion_corrected_name ' '];
+cmd2execute = [cmdprfx ' -t ' motion_corrected_name_lnx ' '];
 for jj = 1 : length(file_list)
     cmd2execute = [ cmd2execute ' ' convertpath2lnx(fullfile(singleMoCo_folder,file_list(jj).name)) ];
 end
